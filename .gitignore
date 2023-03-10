@@ -4,6 +4,7 @@
 .cache
 .coverage
 .tox
+.idea
 /build/
 /dist/
 /venv/

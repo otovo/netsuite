@@ -5,8 +5,39 @@ from . import zeep
 __all__ = ("AsyncNetSuiteTransport",)
 
 
-# TODO: ASYNC! Maybe remove this custom transport?!?!
-
+# def SuperInit(
+#     self,
+#     client=None,
+#     wsdl_client=None,
+#     cache=None,
+#     timeout=300,
+#     operation_timeout=None,
+#     verify_ssl=True,
+#     proxy=None,
+#     ):
+#     if httpx is None:
+#         raise RuntimeError("The AsyncTransport is based on the httpx module")
+#
+#     self._close_session = False
+#     self.cache = cache
+#     self.wsdl_client = wsdl_client or httpx.Client(
+#         verify=verify_ssl,
+#         proxies=proxy,
+#         timeout=timeout,
+#         )
+#     self.client = client or httpx.AsyncClient(
+#         verify=verify_ssl,
+#         proxies=proxy,
+#         timeout=operation_timeout,
+#         )
+#     self.logger = logging.getLogger(__name__)
+#
+#     self.wsdl_client.headers = {
+#         "User-Agent": "Zeep/%s (www.python-zeep.org)" % (get_version())
+#         }
+#     self.client.headers = {
+#         "User-Agent": "Zeep/%s (www.python-zeep.org)" % (get_version())
+#         }
 
 class AsyncNetSuiteTransport(zeep.transports.AsyncTransport):
     """
@@ -23,6 +54,7 @@ class AsyncNetSuiteTransport(zeep.transports.AsyncTransport):
     def __init__(self, wsdl_url, *args, **kwargs):
         parsed = urllib.parse.urlparse(wsdl_url)
         self._netsuite_base_url = f"{parsed.scheme}://{parsed.netloc}"
+        self.session = kwargs.pop('session')
         super().__init__(*args, **kwargs)
 
     def _fix_address(self, address):
