@@ -357,15 +357,13 @@ def _parse_headers_arg(
             parser.error(
                 f"Invalid header: `{raw_header}``. Should have format: `NAME: VALUE`"
             )
-        else:
-            existing = out.get(k)
-            if existing:
-                if isinstance(existing, list):
-                    existing.append(v)
-                else:
-                    out[k] = [existing, v]
+        elif existing := out.get(k):
+            if isinstance(existing, list):
+                existing.append(v)
             else:
-                out[k] = v
+                out[k] = [existing, v]
+        else:
+            out[k] = v
     return out
 
 

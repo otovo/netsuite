@@ -357,15 +357,8 @@ class NetSuiteSoapApi:
         externalIds: Optional[Sequence[str]] = None,
     ) -> List[zeep.xsd.CompoundValue]:
         """Get a list of records"""
-        if internalIds is None:
-            internalIds = []
-        else:
-            internalIds = list(internalIds)
-        if externalIds is None:
-            externalIds = []
-        else:
-            externalIds = list(externalIds)
-
+        internalIds = [] if internalIds is None else list(internalIds)
+        externalIds = [] if externalIds is None else list(externalIds)
         if len(internalIds) + len(externalIds) == 0:
             return []
 
@@ -482,15 +475,8 @@ class NetSuiteSoapApi:
         externalIds: Optional[Sequence[str]] = None,
         lastQtyAvailableChange: datetime = None,
     ) -> List[Dict]:
-        if internalIds is None:
-            internalIds = []
-        else:
-            internalIds = list(internalIds)
-        if externalIds is None:
-            externalIds = []
-        else:
-            externalIds = list(externalIds)
-
+        internalIds = [] if internalIds is None else list(internalIds)
+        externalIds = [] if externalIds is None else list(externalIds)
         if len(internalIds) + len(externalIds) == 0:
             return []
 
