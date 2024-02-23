@@ -46,11 +46,10 @@ class RestApiBase:
 
         if resp.status_code == 204:
             return None
-        else:
-            try:
-                return json.loads(resp.text)
-            except Exception:
-                raise NetsuiteAPIResponseParsingError(resp.status_code, resp.text)
+        try:
+            return json.loads(resp.text)
+        except Exception:
+            raise NetsuiteAPIResponseParsingError(resp.status_code, resp.text)
 
     async def _request_impl(
         self, method: str, subpath: str, **request_kw

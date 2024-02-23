@@ -57,10 +57,7 @@ def main():
         return
 
     # Show help section instead of an error when no arguments were passed...
-    if subparser_name == "rest-api":
-        rest_api_parser.print_help()
-        return
-    elif subparser_name == "soap-api":
+    if subparser_name in ["rest-api", "soap-api"]:
         rest_api_parser.print_help()
         return
     elif subparser_name == "restlet":

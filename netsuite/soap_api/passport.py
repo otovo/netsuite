@@ -42,7 +42,7 @@ class TokenPassport(Passport):
 
     def _generate_nonce(self, length: int = 20) -> str:
         """Generate pseudorandom number"""
-        return "".join([str(random.randint(0, 9)) for i in range(length)])
+        return "".join([str(random.randint(0, 9)) for _ in range(length)])
 
     def _get_signature_message(self, nonce: str, timestamp: str) -> str:
         return "&".join(
